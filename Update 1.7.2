@@ -12,7 +12,7 @@ sudo systemctl stop availd.service
 
 xKralTR yazan yere kendi ismini yaz.
 
-```sudo tee /etc/systemd/system/availd.service > /dev/null <<'EOF'
+"sudo tee /etc/systemd/system/availd.service > /dev/null <<'EOF'
 [Unit]
 Description=Avail Validator
 After=network.target
@@ -27,7 +27,7 @@ ExecStart=/root/avail-node/data-avail-ubuntu-2204-amd64 --base-path /root/avail-
 
 [Install]
 WantedBy=multi-user.target
-EOF ```
+EOF"
 
 Sistemi geri yükle.
 
