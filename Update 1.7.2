@@ -1,0 +1,36 @@
+Güncelleme dosyasını indir
+
+wget https://github.com/availproject/avail/releases/download/v1.7.2/data-avail-ubuntu-2204-amd64.tar.gz
+
+Dosyayı çıkar
+
+tar xvzf data-avail-ubuntu-2204-amd64.tar.gz 
+
+Node'u durdur.
+
+sudo systemctl stop availd.service
+
+xKralTR yazan yere kendi ismini yaz.
+
+sudo tee /etc/systemd/system/availd.service > /dev/null <<'EOF'
+[Unit]
+Description=Avail Validator
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+User=root
+Type=simple
+Restart=always
+RestartSec=120
+ExecStart=/root/avail-node/data-avail-ubuntu-2204-amd64 --base-path /root/avail-node/data --chain /root/avail-node/chainspec.raw.json --port 30333 --validator --name xKralTR
+
+[Install]
+WantedBy=multi-user.target
+EOF 
+
+Sistemi geri yükle.
+
+	sudo systemctl daemon-reload
+	sudo systemctl stop availd.service
+	sudo systemctl restart availd.service	
